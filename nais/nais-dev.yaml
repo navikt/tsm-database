@@ -7,6 +7,19 @@ metadata:
   name: tsm-database
   namespace: tsm
 spec:
+  gcp:
+    sqlInstances:
+      - type: POSTGRES_14
+        databases:
+          - name: tsm-database-dev
+            users:
+              - name: tsm-database-extra-user
+        diskAutoresize: true
+        insights:
+          enabled: true
+        flags:
+          - name: cloudsql.logical_decoding
+            value: "on"
   image: {{image}}
   port: 8080
   replicas:
